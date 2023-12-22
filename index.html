@@ -12,8 +12,8 @@
 
           // every click, we make our model grow in size :)
           animatedMarker.addEventListener('markerFound', function() {
-            var entity = document.querySelector('[sound]');
-            entity.components.sound.playSound();
+            var entity = document.querySelector('#animated-model');
+            entity.components.material.material.map.image.play();
           });
         }
       });
@@ -25,16 +25,18 @@
       <!-- Marker for tracking -->
       <a-marker id="animated-marker" type="pattern" src="./img/pattern-GD1VID1.patt">
         <!-- Plane to display the image -->
-        <a-plane
+        <a-video
           id="animated-model"
           position="0 0 0"
           rotation="-90 0 0"
           width="4"
           height="2.25"
-          material="shader: flat; scale: 2 2 2"
-          sound="src: url(./tube/Ouvrir%20Access.mp4); autoplay: true"
+          src="#video"
           markerhandler
-        ></a-plane>
+        ></a-video>
+        <a-assets>
+          <video id="video" src="./tube/Ouvrir%20Access.mp4" autoplay></video>
+        </a-assets>
       </a-marker>
       <!-- Camera to view the scene -->
       <a-entity camera></a-entity>
