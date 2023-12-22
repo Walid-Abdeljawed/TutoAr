@@ -5,30 +5,35 @@
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
     <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/2.1.7/aframe/build/aframe-ar.js"></script>
     <script>
-      window.onload = function() {
-        var video = document.querySelector('#imagePlane');
-        if (video) {
-          video.addEventListener('click', function() {
-            video.play();
+      AFRAME.registerComponent('markerhandler', {
+        init: function() {
+          const animatedMarker = document.querySelector("#animated-marker");
+          const aEntity = document.querySelector("#animated-model");
+
+          // every click, we make our model grow in size :)
+          animatedMarker.addEventListener('markerFound', function() {
+            var entity = document.querySelector('[sound]');
+            entity.components.sound.playSound();
           });
         }
-      };
+      });
     </script>
   </head>
   <body style="margin: 0; overflow: hidden">
     <h1>Walid Abdeljawed</h1>
     <a-scene embedded arjs="sourceType: webcam; debugUIEnabled: false;">
       <!-- Marker for tracking -->
-      <a-marker type="pattern" src="./img/pattern-GD1VID1.patt">
+      <a-marker id="animated-marker" type="pattern" src="./img/pattern-GD1VID1.patt">
         <!-- Plane to display the image -->
         <a-plane
-          id="imagePlane"
+          id="animated-model"
           position="0 0 0"
           rotation="-90 0 0"
           width="4"
           height="2.25"
           material="shader: flat; scale: 2 2 2"
-          src="./tube/Ouvrir%20Access.mp4"
+          sound="src: url(./tube/Ouvrir%20Access.mp4); autoplay: false"
+          markerhandler
         ></a-plane>
       </a-marker>
       <!-- Camera to view the scene -->
