@@ -8,7 +8,9 @@
       window.onload = function() {
         var video = document.querySelector('#imagePlane');
         if (video) {
-          video.setAttribute('visible', true);
+          video.addEventListener('click', function() {
+            video.play();
+          });
         }
       };
     </script>
@@ -34,4 +36,3 @@
     </a-scene>
   </body>
 </html>
-
